@@ -1,0 +1,12 @@
+{
+    "debug": true,
+    "http": {
+        "listen": "0.0.0.0:4545"
+    },
+    "mailgun":{
+         "domain": "jerrylou.me",
+         "key": "private key",
+         "pubkey": "public key",
+         "to": "jerryloume@gmail.com"
+    }
+}
