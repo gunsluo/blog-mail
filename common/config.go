@@ -3,8 +3,6 @@ package common
 import (
 	"encoding/json"
 	"log"
-
-	"github.com/toolkits/file"
 )
 
 var (
@@ -20,7 +18,7 @@ func ParseConfig(cfg string) {
 		log.Fatalln("use -c to specify configuration file")
 	}
 
-	if !file.IsExist(cfg) {
+	if !IsExist(cfg) {
 		log.Fatalln("config file:", cfg, "is not existent")
 	}
 

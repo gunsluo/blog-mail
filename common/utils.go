@@ -2,6 +2,7 @@ package common
 
 import (
 	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -20,4 +21,17 @@ func ToTrimString(filePath string) (string, error) {
 	}
 
 	return strings.TrimSpace(str), nil
+}
+
+func IsFile(fp string) bool {
+	f, e := os.Stat(fp)
+	if e != nil {
+		return false
+	}
+	return !f.IsDir()
+}
+
+func IsExist(fp string) bool {
+	_, err := os.Stat(fp)
+	return err == nil || os.IsExist(err)
 }
