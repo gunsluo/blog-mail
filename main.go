@@ -19,5 +19,7 @@ func main() {
 	}
 
 	common.ParseConfig(*cfg)
-	http.Start()
+	go http.Start()
+
+	select {}
 }

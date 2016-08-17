@@ -1,8 +1,9 @@
 package http
 
 import (
-	"encoding/json"
 	"net/http"
+
+	"github.com/pquerna/ffjson/ffjson"
 )
 
 type Dto struct {
@@ -11,7 +12,7 @@ type Dto struct {
 }
 
 func RenderJson(w http.ResponseWriter, v interface{}) {
-	bs, err := json.Marshal(v)
+	bs, err := ffjson.Marshal(v)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -20,6 +21,10 @@ func RenderJson(w http.ResponseWriter, v interface{}) {
 	w.Write(bs)
 }
 
-func RenderDataJson(w http.ResponseWriter, data interface{}) {
-	RenderJson(w, Dto{Msg: "success", Data: data})
+func RenderSuccessDataJson(w http.ResponseWriter) {
+	RenderJson(w, Dto{Msg: "Success", Data: "ok"})
+}
+
+func RenderFailedDataJson(w http.ResponseWriter, data interface{}) {
+	RenderJson(w, Dto{Msg: "Failed", Data: data})
 }

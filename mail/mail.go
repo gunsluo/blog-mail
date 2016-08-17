@@ -1,19 +1,28 @@
 package mail
 
 import (
-	"fmt"
+	"errors"
+	"log"
 
+	"github.com/gunsluo/blog-mail/common"
 	mailgun "github.com/mailgun/mailgun-go"
 )
 
 func SendMail(subject string, content string, from string, tos ...string) error {
 
-	//postmaster@jerrylou.me
-	gun := mailgun.NewMailgun("jerrylou.me", "key-535755ffb130fb94d36c88f19a67e32c", "pubkey-31911d1d3ccd3d143c2b4e91d0a7bc9a")
+	c := common.Config().MailGun
+	if c == nil {
+		return errors.New("mailgun config is nil.")
+	}
+
+	gun := mailgun.NewMailgun(c.Domain, c.Key, c.Pubkey)
 
 	m := mailgun.NewMessage(from, subject, content, tos...)
-	response, id, err := gun.Send(m)
-	fmt.Printf("err: %v\n", err)
-	fmt.Printf("Response ID: %s\n", id)
-	fmt.Printf("Message from server: %s\n", response)
+	_, id, err := gun.Send(m)
+	if err != nil {
+		return err
+	}
+
+	log.Printf("send mail Response ID: %s\n", id)
+	return nil
 }

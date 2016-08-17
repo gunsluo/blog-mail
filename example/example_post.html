@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+    <form action="http://127.0.0.1:8000" method="post" autocomplete="on" id="form">
+        E-mail: <input type="email" name="email" id="email" autocomplete="off" /><br />
+        Subject: <input type="text" name="subject" id="subject" /><br />
+        Content: 
+        <textarea rows="3" cols="30" name="content" id="content">
+        </textarea>
+        <!--<button type="button" id="mailBtn">submit</button>-->
+        <input type="button" id="mailBtn" value="submit" >
+    </form>
+
+<script src="http://blog.jerrylou.me/js/jquery.min.js"></script>
+<script>
+
+
+$(document).ready(function(){
+  action = $("#form").attr("action")
+  method = $("#form").attr("method")
+
+  $("#mailBtn").click(function(){
+    data = {
+        subject:$("#subject").val(),
+        content:$("#content").val(),
+        from:$("#email").val(),
+    }
+
+    $.ajax({
+      dataType: 'json',
+      url: action,
+      type: method,
+      data: JSON.stringify(data),
+      success: function( result ) {
+        //alert(result.Msg)
+        //alert(result.Data)
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) { 
+        //alert(XMLHttpRequest.readyState)
+        //alert(XMLHttpRequest.status)
+        //alert(XMLHttpRequest.responseText);  
+      }   
+    });
+  });
+});
+</script>
+
+</body>
+</html>

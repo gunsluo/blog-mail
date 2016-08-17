@@ -22,4 +22,6 @@ _testmain.go
 *.exe
 *.test
 *.prof
+*.swp
 cfg.json
+blog-mail

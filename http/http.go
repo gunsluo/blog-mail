@@ -9,6 +9,8 @@ import (
 
 func Start() {
 
+	configRoutes()
+
 	addr := common.Config().Http.Listen
 	if addr == "" {
 		return
