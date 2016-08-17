@@ -1,6 +1,7 @@
 package http
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/pquerna/ffjson/ffjson"
@@ -26,5 +27,7 @@ func RenderSuccessDataJson(w http.ResponseWriter) {
 }
 
 func RenderFailedDataJson(w http.ResponseWriter, data interface{}) {
+
+	log.Printf("send mail failed: %v\n", data)
 	RenderJson(w, Dto{Msg: "Failed", Data: data})
 }

@@ -1,7 +1,7 @@
 {
     "debug": true,
     "http": {
-        "listen": "0.0.0.0:4545"
+        "listen": "0.0.0.0:8000"
     },
     "mailgun":{
          "domain": "jerrylou.me",
